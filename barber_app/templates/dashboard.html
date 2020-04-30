@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+</head>
+<body>
+        <nav class="navbar navbar-expand-sm navbar-light bg-dark">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link text-light" >Home Page!</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link text-light" >Logout!</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+        <h1 id="the">Hello {{temp_admin.first_name}}, Welcome to the Dashboard! </h1>
+        
+        <div class="row">
+            
+            <form method="post" action="/new_barber" class="form-group col-md-5">
+                {% csrf_token %}
+                <h6>Lets get started by making a new Barber</h6>
+                First Name: <textarea class="form-control" name="first_name" id="" cols="20" rows="2"></textarea><br>
+                Last Name: <textarea class="form-control" name="last_name" id="" cols="20" rows="2"></textarea><br>
+                Phone Number: <textarea class="form-control" name="phone_number" id="" cols="20" rows="2"></textarea><br>
+                Schedule: <textarea class="form-control" name="schedule" id="" cols="20" rows="2"></textarea><br>
+                Experience: <textarea class="form-control" name="experiance" id="" cols="20" rows="2"></textarea><br>
+                Fun Fact:<textarea class="form-control" name="fun_facts" id="" cols="20" rows="2"></textarea>
+                <button class=" btn btn-success mt-3">Create Barber</button>
+            </form>
+            <h1>or</h1>
+            <div class="col-md-5">
+                <form method="post" action="/edit_barber" class="form-group">
+                    
+                    {% csrf_token %}
+                    <h6>Lets get started by <strong>updating</strong> a current Barber</h6> <br>
+                    
+                    Barbers: <select name="barber_select" id="">
+                        {% for list in barbers%}
+                        <option value="{{list.id}}">{{list.first_name}}</option>
+                        {% endfor %}
+                    </select><br><br>
+                    Phone Number: <textarea class="form-control" name="phone_number" id="" cols="20" rows="2"></textarea>
+                    Schedule: <textarea class="form-control" name="schedule" id="" cols="20" rows="2"></textarea>
+                    Experience: <textarea class="form-control" name="experiance" id="" cols="20" rows="2"></textarea>
+                    Fun Fact: <textarea class="form-control" name="fun_facts" id="" cols="20" rows="2"></textarea>
+                    <button class="btn btn-primary mt-3">Update</button>
+                </form>
+                <hr>
+                <form method="post" action="make_admin">
+                    {% csrf_token %}
+                    <h5>Make a <strong>User</strong> an <strong>Admin:</strong>
+                    </h5>
+                    <h6>*This will give the user all admin privileges</h6>
+                    <select name="user_select" id="">
+                        {% for user in users %}
+                        <option value="{{user.id}}">{{user.first_name}}</option>
+                        {% endfor %}
+                        
+                    </select><br>
+                    <button class="btn btn-warning mt-3">Make Admin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

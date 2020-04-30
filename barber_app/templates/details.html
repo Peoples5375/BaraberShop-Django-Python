@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-dark">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/about" class="nav-link text-light" >Home Page!</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link text-light" >Logout!</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-5">
+                <h4>
+                    Barber: {{single_barber.first_name}} {{single_barber.last_name}}
+                </h4>
+                <h4>Contact:</h5>
+                <h6> {{single_barber.phone_number}}</h6>
+                <h4>Schedule for when i cut hair: </h4>
+                <h6>{{single_barber.schedule}}</h6>
+                <h4>Experience: </h4>
+                <h6>{{single_barber.experiance}}</h6>
+                <h4>Fun Facts about me: </h4>
+                <h6 class="mb-5">{{single_barber.fun_facts}}</h6>
+                <hr>
+                <h2>Please write a review:</h2>
+                <form class="form-group mt-5" action="/post_review/{{single_barber.id}}" method="post">
+                    {% csrf_token %}
+                    <textarea class="form-control border border-primary" name="review_post" id="" cols="30" rows="10" placeholder="Spicy jalapeno bacon ipsum dolor amet ball tip ham hock short ribs pig cow meatball pastrami andouille tongue beef ribs. Ham hock bacon beef ribs, rump t-bone corned beef turducken ham cow kevin boudin kielbasa porchetta swine chicken. Leberkas tongue cow jerky sausage, turducken flank filet mignon."></textarea>
+                    <select class="mt-3" name="select_rating" id="select_rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select >
+                    <button class="btn btn-success mt-3">Post Review on {{single_barber.first_name}}</button>
+                </form>
+            </div>
+            <div class="col-md-6 mt-5 ">
+                <h2>Reviews!</h2>
+                {% for x in single_barber.uploaded_barber_review.all %}
+                    <div class="border border-dark p-3 rounded-lg  mt-3">
+                        <p>{{x.created_by.first_name}} Says:</p>
+                        <p>Rating: {{x.rating}}</p>
+                        <p>{{x.review_post}} </p>
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-dark">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/about" class="nav-link text-light" >Home Page!</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link text-light" >Logout!</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Welcome to Kings Den!</h1>
+          <p>Below you will see a list of Barbers at Kings that would <strong>Love</strong> to set an appointment with you! Take a look around and give your future barber a call TODAY!</p>
+          <h6>Address:</h6>
+          <h6>555 S. Memorial Dr.</h6>
+          <h6>Tulsa, OK</h6>
+          <h6>74133</h6>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            {% for x in barbers%}
+          <div class="col-md-4">
+            <h2>{{x.first_name}}</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-primary" href="/details/{{x.id}}" role="button">View details &raquo;</a></p>
+          </div>
+          {% endfor %}
+          
+          </div>
+        </div>
+
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer class="container">
+      <p>&copy; Company 2017-2018</p>
+    </footer>
+</html>
